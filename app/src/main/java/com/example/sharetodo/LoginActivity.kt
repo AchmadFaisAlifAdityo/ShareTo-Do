@@ -40,7 +40,7 @@ class LoginActivity : AppCompatActivity() {
             auth.signInWithEmailAndPassword(usernameoremailInput.text.toString(), passwordLogin.text.toString())
                 .addOnCompleteListener {
                     if(it.isSuccessful){
-                       startActivity(Intent(this@LoginActivity, ProfileActivity::class.java))
+                       startActivity(Intent(this@LoginActivity, MainActivity::class.java))
                         finish()
 
                     }else{

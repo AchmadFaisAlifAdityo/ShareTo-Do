@@ -40,23 +40,27 @@ class RegistrationActivity : AppCompatActivity() {
             }else if(TextUtils.isEmpty(passwordInput.text.toString())) {
                 passwordInput.setError("Please enter Password!")
                 return@setOnClickListener
+            } else if(TextUtils.isEmpty(rpasswordInput.text.toString())) {
+                rpasswordInput.setError("Please enter Password!")
+                return@setOnClickListener
+            } else if(!TextUtils.equals(passwordInput.text.toString(), rpasswordInput.text.toString())){
+                rpasswordInput.setError("Password doesn't match!")
+                return@setOnClickListener
             }
             auth.createUserWithEmailAndPassword(emailInput.text.toString(), passwordInput.text.toString())
-                    .addOnCompleteListener {
-                        if(it.isSuccessful){
-                            val currentUser = auth.currentUser
-                            val currentUserDb = databaseReference?.child((currentUser?.uid!!))
-                            currentUserDb?.child("Username")?.setValue(UsernameInput.text.toString())
+                .addOnCompleteListener {
+                    if(it.isSuccessful){
+                        val currentUser = auth.currentUser
+                        val currentUserDb = databaseReference?.child((currentUser?.uid!!))
+                        currentUserDb?.child("Username")?.setValue(UsernameInput.text.toString())
 
-                            Toast.makeText(this@RegistrationActivity, "Registration Success!", Toast.LENGTH_LONG).show()
-                            finish()
+                        Toast.makeText(this@RegistrationActivity, "Registration Success!", Toast.LENGTH_LONG).show()
+                        finish()
 
-                        }else{
-                            Toast.makeText(this@RegistrationActivity, "Registration Failed, please try again!", Toast.LENGTH_LONG).show()
-
-                        }
+                    }else{
+                        Toast.makeText(this@RegistrationActivity, "Registration Failed, please try again!", Toast.LENGTH_LONG).show()
                     }
-
+                }
         }
     }
 }
