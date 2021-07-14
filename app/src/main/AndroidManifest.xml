@@ -11,9 +11,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.ShareToDo">
-        <activity android:name=".ProfileActivity"></activity>
+        <activity android:name=".ForgotPassword"/>
+        <activity android:name=".ProfileActivity" />
         <activity android:name=".RegistrationActivity" />
         <activity android:name=".MainActivity" />
+        <activity android:name=".MyTaskActivity" />
+        <activity android:name=".AddTaskActivity" />
         <activity android:name=".LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

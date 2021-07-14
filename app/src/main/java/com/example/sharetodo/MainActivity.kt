@@ -26,7 +26,7 @@ class MainActivity : AppCompatActivity() {
         navView.setNavigationItemSelectedListener {
             when(it.itemId){
                 R.id.Item1 -> startActivity(Intent(this@MainActivity, ProfileActivity::class.java))
-                R.id.Item2 -> startActivity(Intent(this@MainActivity, ProfileActivity::class.java))
+                R.id.Item2 -> startActivity(Intent(this@MainActivity, MyTaskActivity::class.java))
                 R.id.Item3 -> startActivity(Intent(this@MainActivity, ProfileActivity::class.java))
                 R.id.Item4 -> startActivity(Intent(this@MainActivity, LoginActivity::class.java))
             }

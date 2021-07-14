@@ -1,5 +1,6 @@
 package com.example.sharetodo
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.TextUtils
@@ -61,6 +62,10 @@ class RegistrationActivity : AppCompatActivity() {
                         Toast.makeText(this@RegistrationActivity, "Registration Failed, please try again!", Toast.LENGTH_LONG).show()
                     }
                 }
+        }
+
+        iv_backr.setOnClickListener {
+            startActivity(Intent(this@RegistrationActivity, LoginActivity::class.java))
         }
     }
 }

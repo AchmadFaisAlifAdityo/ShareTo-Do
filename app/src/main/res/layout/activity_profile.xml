@@ -6,6 +6,17 @@
     android:layout_height="match_parent"
     tools:context=".ProfileActivity">
 
+    <ImageView
+        android:id="@+id/iv_backp"
+        android:layout_width="15dp"
+        android:layout_height="25dp"
+        android:layout_marginTop="40dp"
+        android:background="@drawable/ic_back"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.108"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <TextView
         android:id="@+id/username"
         android:layout_width="wrap_content"
@@ -14,8 +25,9 @@
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/iv_backp"
         android:layout_margin="10dp"
+        android:layout_marginTop="10dp"
         android:textColor="#000000"/>
 
     <TextView
@@ -28,6 +40,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/username"
         android:layout_margin="10dp"
+        android:layout_marginTop="10dp"
         android:textColor="#000000"/>
 
     <Button
@@ -40,5 +53,6 @@
         android:textAllCaps="false"
         android:text="Logout"
         android:layout_margin="10dp"
+        android:layout_marginTop="10dp"
         android:textStyle="bold"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

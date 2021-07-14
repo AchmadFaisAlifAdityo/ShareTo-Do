@@ -6,6 +6,7 @@ import android.os.Bundle
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.activity_profile.*
+import kotlinx.android.synthetic.main.activity_registration.*
 
 class ProfileActivity : AppCompatActivity() {
     lateinit var auth: FirebaseAuth
@@ -44,6 +45,10 @@ class ProfileActivity : AppCompatActivity() {
             auth.signOut()
             startActivity(Intent(this@ProfileActivity, LoginActivity::class.java))
             finish()
+        }
+
+        iv_backp.setOnClickListener {
+            startActivity(Intent(this@ProfileActivity, MainActivity::class.java))
         }
     }
 }

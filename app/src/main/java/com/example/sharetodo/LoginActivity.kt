@@ -6,7 +6,9 @@ import android.os.Bundle
 import android.text.TextUtils
 import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
+import kotlinx.android.synthetic.main.activity_forgot_password.*
 import kotlinx.android.synthetic.main.activity_login.*
+import kotlinx.android.synthetic.main.activity_login.usernameoremailInput
 import kotlinx.android.synthetic.main.activity_profile.*
 import kotlinx.android.synthetic.main.activity_registration.*
 
@@ -52,6 +54,10 @@ class LoginActivity : AppCompatActivity() {
 
         registerText.setOnClickListener {
             startActivity(Intent(this@LoginActivity, RegistrationActivity::class.java))
+        }
+
+        tv_forgotPassword.setOnClickListener {
+            startActivity(Intent(this@LoginActivity, ForgotPassword::class.java))
         }
     }
 }

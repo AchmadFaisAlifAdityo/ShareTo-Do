@@ -32,11 +32,11 @@ class RecycleViewAdapter() : RecyclerView.Adapter<RecycleViewAdapter.ViewHolder>
     }
 
     override fun onBindViewHolder(holder: RecycleViewAdapter.ViewHolder, i: Int) {
-        holder.
+        //holder.
     }
 
     override fun getItemCount(): Int {
-        return lisItem.count()
+        return listItem.count()
     }
 }
 

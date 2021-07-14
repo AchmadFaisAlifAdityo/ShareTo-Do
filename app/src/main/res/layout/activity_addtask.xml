@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:context=".AddTaskActivity">
 
     <EditText
         android:id="@+id/edt_judul"
@@ -11,8 +12,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="44dp"
         android:ems="10"
+        android:hint="Judul"
         android:inputType="textPersonName"
-        android:text="Judul"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.079"
         app:layout_constraintStart_toStartOf="parent"
@@ -21,12 +22,12 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_list"
         android:layout_width="375dp"
-        android:layout_height="565dp"
+        android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.484"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/bt_addlist" />
+        app:layout_constraintTop_toBottomOf="@+id/bt_addlist"
+        app:layout_constraintVertical_bias="0.084" />
 
     <ImageView
         android:id="@+id/bt_addlist"
@@ -36,7 +37,26 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.052"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edt_judul"
-        app:srcCompat="@drawable/ic_addtask" />
+        app:layout_constraintTop_toBottomOf="@+id/edt_judul"/>
+        //app:srcCompat="@drawable/ic_addtask" />
 
+    <Button
+        android:id="@+id/bt_Everyone"
+        android:layout_width="327dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:text="Add Task For Everyone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/rv_list" />
+
+    <Button
+        android:id="@+id/bt_mytask"
+        android:layout_width="327dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="Add Task For Me"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/bt_Everyone" />
 </androidx.constraintlayout.widget.ConstraintLayout>
