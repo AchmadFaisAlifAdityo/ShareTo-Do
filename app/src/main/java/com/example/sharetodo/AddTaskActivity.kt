@@ -7,10 +7,14 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.activity_addtask.*
+import kotlinx.android.synthetic.main.activity_profile.*
 import kotlinx.android.synthetic.main.activity_registration.*
+import java.text.DateFormat
+import java.text.SimpleDateFormat
+import java.util.*
+import kotlin.collections.ArrayList
 
 class AddTaskActivity : AppCompatActivity() {
     lateinit var auth: FirebaseAuth
@@ -39,6 +43,9 @@ class AddTaskActivity : AppCompatActivity() {
             bt_mytask.setOnClickListener {
                 saveData()
             }
+            bt_Everyone.setOnClickListener {
+                saveData()
+            }
         }
     }
 
@@ -48,8 +55,12 @@ class AddTaskActivity : AppCompatActivity() {
 
         val ref = FirebaseDatabase.getInstance().getReference("MyTask")
         val myTaskId = ref.push().key
-        //val currentUser = auth.currentUser
-        val myTask = MyTask(myTaskId, judul)
+        val currentUser = auth.currentUser
+        val username = currentUser?.displayName.toString()
+        val sdf = SimpleDateFormat("HH:mm")
+        val cal = Calendar.getInstance()
+        val waktu = sdf.format(cal.time)
+        val myTask = MyTask(username, myTaskId, judul, waktu)
 
         if(myTaskId != null){
             ref.child(myTaskId).setValue(myTask).addOnCompleteListener{

@@ -22,7 +22,8 @@ class MyTaskAdapter(val mCtx : Context, val LayoutResid : Int, val myTaskList : 
         val MyTask = myTaskList[position]
 
         tvJudul.text = MyTask.judul
-        //tvAuthor.text = MyTask.author.toString()
+        tvAuthor.text = MyTask.author
+        tvWaktu.text = MyTask.waktu
 
         return view
     }
