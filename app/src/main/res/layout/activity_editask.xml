@@ -38,7 +38,7 @@
         android:orientation="vertical"></LinearLayout>
 
     <Button
-        android:id="@+id/bt_Everyone"
+        android:id="@+id/bt_Submit"
         android:layout_width="358dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
@@ -46,14 +46,5 @@
         android:layout_marginRight="20dp"
         android:fontFamily="@font/average_sans"
         android:text="Share for Everyone" />
-
-    <Button
-        android:id="@+id/bt_mytask"
-        android:layout_width="358dp"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:fontFamily="@font/average_sans"
-        android:text="Share for me" />
 
 </LinearLayout>

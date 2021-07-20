@@ -39,7 +39,7 @@ class MyTaskActivity : AppCompatActivity() {
                         }
                     }
                     val adapter = MyTaskAdapter(applicationContext, R.layout.item_mytask,myTaskList)
-                    lv_myTask.adapter = adapter
+                    lv_Mytask.adapter = adapter
                 }
             }
 
