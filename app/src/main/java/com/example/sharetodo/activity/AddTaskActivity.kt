@@ -5,10 +5,7 @@ import Database.MyTask
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import android.widget.EditText
-import android.widget.ImageView
-import android.widget.LinearLayout
-import android.widget.Toast
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import com.example.sharetodo.R
 import com.example.sharetodo.entity.ItemLIst
@@ -43,26 +40,27 @@ class AddTaskActivity : AppCompatActivity() {
         databaseReference = database?.reference!!.child("profile")
 
         if(currentuser != null) {
-            bt_addlist.setOnClickListener{
+            bt_addlist_upd.setOnClickListener{
                 addList()
             }
             bt_mytask.setOnClickListener{
-                checkandRead()
-                saveData()
+                checkAndRead()
+                saveData("Private")
                 val intent = Intent(this@AddTaskActivity, MyTaskActivity::class.java)
                 startActivity(intent)
 
             }
             bt_Everyone.setOnClickListener{
-                checkandRead()
-                saveData()
+                checkAndRead()
+                saveData("Public")
             }
         }
     }
 
     private fun addList(){
         val v: View = layoutInflater.inflate(R.layout.card_layout, null, false)
-
+        
+/*        val checkList = v.findViewById(R.id.cb_list) as CheckBox*/
         val listItem = v.findViewById(R.id.edt_list) as EditText
         val deleteList = v.findViewById(R.id.bt_deletelist) as ImageView
 
@@ -74,18 +72,19 @@ class AddTaskActivity : AppCompatActivity() {
         layoutList!!.removeView(view)
     }
 
-    private fun checkandRead(): Boolean {
+    private fun checkAndRead(): Boolean {
         lisItem.clear()
         var result = true
         for (i in 0 until layoutList!!.childCount) {
 
             val listItem = layoutList!!.getChildAt(i)
-            val edtList = listItem.findViewById<View>(R.id.edt_list) as EditText
+            
+/*            val checkList = listItem.findViewById(R.id.cb_list) as CheckBox*/
+            val edtList = listItem.findViewById(R.id.edt_list) as EditText
             val il = ItemLIst()
 
-            if (edtList.text.toString() != "") {
+            if(edtList.text.toString() != "") {
                 il.setItem(edtList.text.toString())
-
             } else {
                 result = false
                 break
@@ -104,20 +103,23 @@ class AddTaskActivity : AppCompatActivity() {
         return true
     }
 
-    private fun saveData(){
+    private fun saveData(akses: String){
         val judul = edt_update_judul.text.toString().trim()
-        val ref = FirebaseDatabase.getInstance().getReference("MyTask")
+        val ref = FirebaseDatabase.getInstance().getReference()
         val myTaskId = ref.push().key
-        val currentUser = auth.currentUser
-        val username = currentUser?.displayName.toString()
+        val userID = auth.uid.toString()
         val sdf = SimpleDateFormat("HH:mm a")
         val cal = Calendar.getInstance()
         val waktu = sdf.format(cal.time)
-        val myTask = MyTask(username, myTaskId, judul, waktu, lisItem)
+        val myTask = MyTask(userID, myTaskId, judul, waktu, lisItem)
 
         if(myTaskId != null){
-            ref.child(myTaskId).setValue(myTask).addOnCompleteListener{
+            ref.child("Tasks").child(myTaskId).setValue(myTask).addOnCompleteListener{
                 Toast.makeText(applicationContext, "Data berhasil ditambahkan", Toast.LENGTH_SHORT).show()
+            }
+            ref.child("MyTask").child(userID).child(myTaskId).setValue(true)
+            if(akses.equals("Public")){
+                ref.child("PublicTask").child(myTaskId).setValue(userID)
             }
         }
     }

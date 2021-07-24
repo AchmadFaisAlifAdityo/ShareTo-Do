@@ -3,11 +3,11 @@ package Database
 import com.example.sharetodo.entity.ItemLIst
 
 data class MyTask(
-        val author: String,
-        val id: String?,
-        val judul: String,
-        val waktu: String,
-        val listItem: ArrayList<ItemLIst>
+    var author: String,
+    var id: String?,
+    var judul: String,
+    var waktu: String,
+    var listItem: ArrayList<ItemLIst>
 
 ){
 

@@ -23,7 +23,7 @@
         android:inputType="textPersonName" />
 
     <ImageView
-        android:id="@+id/bt_addlist"
+        android:id="@+id/bt_addlist_upd"
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:layout_marginTop="16dp"

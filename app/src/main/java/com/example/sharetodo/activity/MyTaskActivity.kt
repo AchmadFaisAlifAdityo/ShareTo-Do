@@ -18,7 +18,8 @@ class MyTaskActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_mytask)
-        ref = FirebaseDatabase.getInstance().getReference("MyTask")
+        auth = FirebaseAuth.getInstance()
+        ref = FirebaseDatabase.getInstance().getReference()
 
 
         bt_addTask.setOnClickListener{
@@ -26,15 +27,15 @@ class MyTaskActivity : AppCompatActivity() {
         }
         myTaskList = mutableListOf()
 
-        ref.addValueEventListener(object : ValueEventListener{
+        ref.child("MyTask").child(auth.uid.toString()).addValueEventListener(object : ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
                 if(snapshot.exists()){
                     myTaskList.clear()
                     for(h in snapshot.children){
-                        val myTask = h.getValue(MyTask::class.java)
-                        if(myTask != null){
-                            myTaskList.add(myTask)
-                        }
+                        var myTask = MyTask()
+                        myTask.id = h.key
+                        myTaskList.add(myTask)
+                        loadTasks(myTask)
                     }
                     val adapter = MyTaskAdapter(applicationContext, R.layout.item_mytask,myTaskList)
                     lv_Mytask.adapter = adapter
@@ -47,4 +48,28 @@ class MyTaskActivity : AppCompatActivity() {
 
         })
     }
+
+    private  fun loadTasks(myTask: MyTask){
+        ref.child("Tasks").child(myTask.id.toString()).addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                if (snapshot.exists()){
+                    val task = snapshot.getValue(MyTask::class.java)
+                    if (task != null) {
+                        myTask.judul = task.judul
+                        myTask.author = task.author
+                        myTask.listItem  = task.listItem
+                        myTask.waktu = task.waktu
+                    }
+                    val adapter = MyTaskAdapter(applicationContext, R.layout.item_mytask,myTaskList)
+                    lv_Mytask.adapter = adapter
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                TODO("Not yet implemented")
+            }
+
+        })
+    }
+
 }

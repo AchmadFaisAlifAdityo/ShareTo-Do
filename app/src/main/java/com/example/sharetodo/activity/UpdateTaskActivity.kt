@@ -2,15 +2,14 @@ package com.example.sharetodo.activity
 
 import Database.MyTask
 import android.os.Bundle
+import android.util.Log
 import android.view.View
-import android.widget.EditText
-import android.widget.ImageView
-import android.widget.LinearLayout
-import android.widget.Toast
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import com.example.sharetodo.R
 import com.example.sharetodo.entity.ItemLIst
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import kotlinx.android.synthetic.main.activity_editask.*
 import java.text.SimpleDateFormat
@@ -24,42 +23,73 @@ class UpdateTaskActivity : AppCompatActivity() {
     lateinit var item: EditText
     var layoutList: LinearLayout? = null
     private var lisItem: ArrayList<ItemLIst> = ArrayList()
+    private lateinit var ref : DatabaseReference
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_editask)
         layoutList = findViewById(R.id.layout_list_upd)
+        ref = FirebaseDatabase.getInstance().getReference("MyTask")
+        auth = FirebaseAuth.getInstance()
         getAndSetDataUpdate()
+        bt_addlist_upd.setOnClickListener {
+            addList()
+        }
+
         bt_Submit.setOnClickListener {
+            checkandRead()
             saveData()
+        }
+
+    }
+
+
+    private fun removeView(view: View) {
+        layoutList!!.removeView(view)
+    }
+
+    private fun getAndSetDataUpdate() {
+
+        judul = findViewById(R.id.edt_update_judul)
+
+        if (intent.extras != null) {
+            judul.setText(intent.getStringExtra("Judul"))
+            for (i in (intent.extras!!.getSerializable("Itemlist") as java.util.ArrayList<ItemLIst>)){
+                val v: View = layoutInflater.inflate(R.layout.card_layout_upd, null, false)
+                item = v.findViewById(R.id.edt_list_upd)
+                item.setText(i.getItem())
+                val deleteList = v.findViewById(R.id.bt_deletelist_upd) as ImageView
+                deleteList.setOnClickListener {
+                    removeView(v)
+                }
+                layoutList!!.addView(v)
+            }
+        } else {
+            Toast.makeText(this, "No data.", Toast.LENGTH_SHORT).show()
         }
     }
 
     private fun addList(){
         val v: View = layoutInflater.inflate(R.layout.card_layout_upd, null, false)
 
-        val listItem = v.findViewById(R.id.edt_list) as EditText
-        val deleteList = v.findViewById(R.id.bt_deletelist) as ImageView
+        val listItem = v.findViewById(R.id.edt_list_upd) as EditText
+        val deleteList = v.findViewById(R.id.bt_deletelist_upd) as ImageView
 
         deleteList.setOnClickListener { removeView(v) }
         layoutList!!.addView(v)
     }
 
-    private fun removeView(view: View) {
-        layoutList!!.removeView(view)
-    }
-
-/*    private fun checkandRead(): Boolean {
+    private fun checkandRead(): Boolean {
+        lisItem.clear()
         var result = true
         for (i in 0 until layoutList!!.childCount) {
 
             val listItem = layoutList!!.getChildAt(i)
-            val edtList = listItem.findViewById<View>(R.id.edt_list) as EditText
+            val edtList = listItem.findViewById<View>(R.id.edt_list_upd) as EditText
             val il = ItemLIst()
 
             if (edtList.text.toString() != "") {
                 il.setItem(edtList.text.toString())
-
             } else {
                 result = false
                 break
@@ -78,39 +108,18 @@ class UpdateTaskActivity : AppCompatActivity() {
         return true
     }
 
-    private fun readList(){
-
-    }*/
-
-    private fun getAndSetDataUpdate() {
-   /*     val v: View = layoutInflater.inflate(R.layout.card_layout_upd, null, false)*/
-        judul = findViewById(R.id.edt_update_judul)
-        item = findViewById(R.id.edt_list_upd)
-
-        if (intent.extras != null) {
-            judul.setText(intent.getStringExtra("Judul"))
-            /*for (i in intent.getStringExtra("ItemList")!!.indices){
-                val
-                item.setText(intent.getStringExtra("ItemList"))
-                layoutList!!.addView(v)
-            }*/
-        } else {
-            Toast.makeText(this, "No data.", Toast.LENGTH_SHORT).show()
-        }
-    }
-
     private fun saveData(){
-        val ref = FirebaseDatabase.getInstance().getReference("MyTask")
-        val myTaskId = ref.push().key
-        val username = auth.toString()
+        val ref = FirebaseDatabase.getInstance().getReference()
+        val myTaskId = intent.getStringExtra("Id")
+        val userID = auth.uid.toString()
         val sdf = SimpleDateFormat("HH:mm a")
         val cal = Calendar.getInstance()
         val waktu = sdf.format(cal.time)
-        val myTask = MyTask(username, myTaskId, judul.toString(), waktu, ArrayList())
+        val myTask = MyTask(userID, myTaskId, judul.text.toString(), waktu, lisItem)
 
         if(myTaskId != null){
-            ref.child(myTaskId).setValue(myTask).addOnCompleteListener{
-                Toast.makeText(applicationContext, "Data berhasil di-update", Toast.LENGTH_SHORT).show()
+            ref.child("Tasks").child(myTaskId).setValue(myTask).addOnCompleteListener{
+                Toast.makeText(applicationContext, "Data berhasil di update ", Toast.LENGTH_SHORT).show()
             }
         }
     }
