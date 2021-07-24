@@ -1,13 +1,13 @@
-package com.example.sharetodo
+package com.example.sharetodo.activity
 
 import Database.MyTask
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
-import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
-import androidx.fragment.app.Fragment
+import com.example.sharetodo.R
+import com.example.sharetodo.adapter.PublicTaskAdapter
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.activity_main.*
@@ -35,7 +35,8 @@ class MainActivity : AppCompatActivity() {
                             publicTaskList.add(myTask)
                         }
                     }
-                    val adapter = PublicTaskAdapter(applicationContext, R.layout.item_publictask,publicTaskList)
+                    val adapter = PublicTaskAdapter(applicationContext,
+                        R.layout.item_publictask,publicTaskList)
                     lvp_myTask.adapter = adapter
                 }
             }

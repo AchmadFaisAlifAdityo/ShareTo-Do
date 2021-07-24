@@ -30,12 +30,17 @@
         android:layout_marginLeft="20dp"
         android:background="@drawable/ic_addtask" />
 
-    <LinearLayout
-        android:id="@+id/layout_list"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="364dp"
-        android:layout_marginTop="10dp"
-        android:orientation="vertical"></LinearLayout>
+        android:layout_height="346dp">
+
+        <LinearLayout
+            android:id="@+id/layout_list_upd"
+            android:layout_width="match_parent"
+            android:layout_height="364dp"
+            android:layout_marginTop="10dp"
+            android:orientation="vertical"></LinearLayout>
+    </ScrollView>
 
     <Button
         android:id="@+id/bt_Everyone"

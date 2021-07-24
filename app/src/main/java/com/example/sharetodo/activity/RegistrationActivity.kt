@@ -1,17 +1,16 @@
-package com.example.sharetodo
+package com.example.sharetodo.activity
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.TextUtils
 import android.widget.Toast
+import com.example.sharetodo.R
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.ktx.Firebase
 import kotlinx.android.synthetic.main.activity_profile.*
 import kotlinx.android.synthetic.main.activity_registration.*
-import java.lang.ref.Reference
 
 class RegistrationActivity : AppCompatActivity() {
     lateinit var auth: FirebaseAuth

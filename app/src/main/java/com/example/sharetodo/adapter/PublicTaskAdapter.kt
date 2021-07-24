@@ -1,4 +1,4 @@
-package com.example.sharetodo
+package com.example.sharetodo.adapter
 
 import Database.MyTask
 import android.content.Context
@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.TextView
+import com.example.sharetodo.R
 
 class PublicTaskAdapter(val mCtx : Context, val LayoutResid : Int, val publicTaskList : List<MyTask>) : ArrayAdapter<MyTask>(mCtx,LayoutResid,publicTaskList){
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
