@@ -4,6 +4,7 @@
     android:layout_height="70dp">
 
    <!-- <CheckBox
+
         android:id="@+id/cb_list"
         android:layout_width="33dp"
         android:layout_height="50dp"
@@ -12,18 +13,17 @@
 
     <EditText
         android:id="@+id/edt_list"
-        android:layout_width="240dp"
+        android:layout_width="310dp"
         android:layout_height="43dp"
-        android:layout_marginLeft="75dp"
+        android:layout_marginLeft="20dp"
         android:layout_marginTop="8dp"
         android:layout_marginRight="5dp"
-
         android:layout_weight="1"
         android:background="@drawable/round_grey"
         android:hint=""
         android:paddingLeft="10dp"
         android:textColor="@color/black"
-        android:textSize="14sp" />
+        android:textSize="16dp" />
 
     <ImageView
         android:id="@+id/bt_deletelist"

@@ -6,7 +6,7 @@ import java.io.Serializable
 class ItemLIst : Serializable{
 
     var itemlist: String = ""
- /*   var checklist: Boolean = false*/
+    var checklist: Boolean? = false
 
     constructor()
 
@@ -14,15 +14,15 @@ class ItemLIst : Serializable{
         this.itemlist = itemList
     }
 
- /*   fun setCheckList(checklist: Boolean) {
-        this.checklist = checklist
+ /*   fun setCheckList(checkLista: Boolean) {
+        this.checklist = checkLista
     }*/
 
     fun getItem(): String {
         return itemlist
     }
 
-/*    fun getCheckList(): Boolean{
+/*   fun getCheckList(): Boolean? {
         return checklist
     }*/
 

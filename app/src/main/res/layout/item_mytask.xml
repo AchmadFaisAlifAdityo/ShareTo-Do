@@ -3,32 +3,36 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="70dp"
+    android:layout_margin="5dp">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/crd_view"
-        android:layout_width="375dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="16dp"
+        android:layout_width="match_parent"
+        android:layout_height="65dp"
+        android:layout_marginBottom="5dp"
+        app:cardCornerRadius="10dp"
+        app:cardMaxElevation="30dp"
+        app:cardBackgroundColor="@color/test"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.2"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.023">
+        app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
             android:id="@+id/img_task"
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="17dp"
             android:background="@drawable/ic_assignment" />
 
         <TextView
             android:id="@+id/tv_judultask"
-            android:layout_width="273dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="60dp"
+            android:layout_marginTop="7dp"
             android:ems="10"
             android:text="Syarat Bikin SIM"
             android:textSize="20sp"
@@ -36,10 +40,10 @@
 
         <TextView
             android:id="@+id/tv_author"
-            android:layout_width="175dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="60dp"
-            android:layout_marginTop="28dp"
+            android:layout_marginTop="35dp"
             android:ems="10"
             android:text="tes"
             android:textColor="@color/black"
@@ -50,7 +54,7 @@
             android:layout_width="69dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="264dp"
-            android:layout_marginTop="28dp"
+            android:layout_marginTop="35dp"
             android:ems="10"
             android:text="9.00 AM"
             android:textColor="@color/black"
@@ -60,8 +64,8 @@
             android:id="@+id/actioncard"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="335dp"
-            android:layout_marginTop="13dp"
+            android:layout_marginLeft="340dp"
+            android:layout_marginTop="19dp"
             android:background="@drawable/ic_baseline_more_vert_24" />
 
     </androidx.cardview.widget.CardView>

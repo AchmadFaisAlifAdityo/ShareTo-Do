@@ -46,6 +46,7 @@ class AddTaskActivity : AppCompatActivity() {
             bt_mytask.setOnClickListener{
                 checkAndRead()
                 saveData("Private")
+                finish()
                 val intent = Intent(this@AddTaskActivity, MyTaskActivity::class.java)
                 startActivity(intent)
 
@@ -53,14 +54,16 @@ class AddTaskActivity : AppCompatActivity() {
             bt_Everyone.setOnClickListener{
                 checkAndRead()
                 saveData("Public")
+                finish()
+                val intent = Intent(this@AddTaskActivity, MainActivity::class.java)
+                startActivity(intent)
             }
         }
     }
 
     private fun addList(){
         val v: View = layoutInflater.inflate(R.layout.card_layout, null, false)
-        
-/*        val checkList = v.findViewById(R.id.cb_list) as CheckBox*/
+
         val listItem = v.findViewById(R.id.edt_list) as EditText
         val deleteList = v.findViewById(R.id.bt_deletelist) as ImageView
 
@@ -78,8 +81,7 @@ class AddTaskActivity : AppCompatActivity() {
         for (i in 0 until layoutList!!.childCount) {
 
             val listItem = layoutList!!.getChildAt(i)
-            
-/*            val checkList = listItem.findViewById(R.id.cb_list) as CheckBox*/
+
             val edtList = listItem.findViewById(R.id.edt_list) as EditText
             val il = ItemLIst()
 
@@ -91,7 +93,6 @@ class AddTaskActivity : AppCompatActivity() {
             }
 
             lisItem.add(il)
-
         }
 
         if (lisItem.size == 0) {
@@ -105,7 +106,7 @@ class AddTaskActivity : AppCompatActivity() {
 
     private fun saveData(akses: String){
         val judul = edt_update_judul.text.toString().trim()
-        val ref = FirebaseDatabase.getInstance().getReference()
+        val ref = FirebaseDatabase.getInstance().reference
         val myTaskId = ref.push().key
         val userID = auth.uid.toString()
         val sdf = SimpleDateFormat("HH:mm a")
@@ -118,7 +119,7 @@ class AddTaskActivity : AppCompatActivity() {
                 Toast.makeText(applicationContext, "Data berhasil ditambahkan", Toast.LENGTH_SHORT).show()
             }
             ref.child("MyTask").child(userID).child(myTaskId).setValue(true)
-            if(akses.equals("Public")){
+            if(akses == "Public"){
                 ref.child("PublicTask").child(myTaskId).setValue(userID)
             }
         }

@@ -19,7 +19,7 @@ class MyTaskActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_mytask)
         auth = FirebaseAuth.getInstance()
-        ref = FirebaseDatabase.getInstance().getReference()
+        ref = FirebaseDatabase.getInstance().reference
 
 
         bt_addTask.setOnClickListener{

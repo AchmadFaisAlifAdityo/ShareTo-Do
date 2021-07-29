@@ -20,30 +20,29 @@ class DetailTaskActivity : AppCompatActivity() {
     lateinit var itemList : TextView
     private var lisItem: ArrayList<ItemLIst> = ArrayList()
     var layoutList : LinearLayout?=null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detail_task)
         layoutList = findViewById(R.id.layout_list_dta)
-        getAndSetDataUpdate()
+        getAndSetData()
 
         auth = FirebaseAuth.getInstance()
         bt_clone.setOnClickListener{
-            checkandRead()
+            checkAndReadList()
             cloneData()
             Toast.makeText(this,"Task berhasil di clone ke My Task",Toast.LENGTH_SHORT).show()
         }
     }
 
-    private fun getAndSetDataUpdate() {
-
+    private fun getAndSetData() {
         judul = findViewById(R.id.tvd_judul)
-
         if (intent.extras != null) {
-            judul.setText(intent.getStringExtra("Judul"))
+            judul.text = intent.getStringExtra("Judul")
             for (i in (intent.extras!!.getSerializable("Itemlist") as java.util.ArrayList<ItemLIst>)){
                 val v: View = layoutInflater.inflate(R.layout.card_layout_dta, null, false)
                 itemList = v.findViewById(R.id.tv_list_dta)
-                itemList.setText(i.getItem())
+                itemList.text = i.getItem()
                 layoutList!!.addView(v)
             }
         } else {
@@ -51,7 +50,7 @@ class DetailTaskActivity : AppCompatActivity() {
         }
     }
 
-    private fun checkandRead(): Boolean {
+    private fun checkAndReadList(): Boolean {
         lisItem.clear()
         var result = true
         for (i in 0 until layoutList!!.childCount) {
@@ -66,22 +65,13 @@ class DetailTaskActivity : AppCompatActivity() {
                 result = false
                 break
             }
-
             lisItem.add(il)
-
         }
-
-        if (lisItem.size == 0) {
-            Toast.makeText(this, "Add Item List First!", Toast.LENGTH_SHORT).show()
-        } else if (!result) {
-            Toast.makeText(this, "Enter All Details Correctly!", Toast.LENGTH_SHORT).show()
-        }
-
-        return true
+        return result
     }
 
     private fun cloneData(){
-            val ref = FirebaseDatabase.getInstance().getReference()
+            val ref = FirebaseDatabase.getInstance().reference
             val myTaskId = ref.push().key
             val userID = auth.uid.toString()
             val sdf = SimpleDateFormat("HH:mm a")

@@ -20,6 +20,7 @@
         android:layout_marginTop="44dp"
         android:ems="10"
         android:hint="Title"
+        android:textSize="20dp"
         android:inputType="textPersonName" />
 
     <ImageView
@@ -46,11 +47,11 @@
         android:id="@+id/bt_Everyone"
         android:layout_width="358dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
         android:layout_marginLeft="20dp"
+        android:layout_marginTop="10dp"
         android:layout_marginRight="20dp"
         android:fontFamily="@font/average_sans"
-        android:text="Share for Everyone" />
+        android:text="Share for Public" />
 
     <Button
         android:id="@+id/bt_mytask"

@@ -8,8 +8,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
-import androidx.cardview.widget.CardView
 import com.example.sharetodo.R
+import com.example.sharetodo.activity.DetailMyTaskActivity
 import com.example.sharetodo.activity.UpdateTaskActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
@@ -33,6 +33,15 @@ class MyTaskAdapter(val mCtx: Context, val LayoutResid: Int, var myTaskList: Lis
         tvJudul.text = MyTask.judul
         loadUsername(MyTask.author, tvAuthor)
         tvWaktu.text = MyTask.waktu
+        view.setOnClickListener {
+            val intent = Intent(mCtx, DetailMyTaskActivity::class.java)
+            val bundle = Bundle()
+            bundle.putSerializable("Id", MyTask.id)
+            bundle.putSerializable("Judul", MyTask.judul)
+            bundle.putSerializable("Itemlist", MyTask.listItem)
+            intent.putExtras(bundle)
+            mCtx.startActivity(intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK))
+        }
 
         menu.setOnClickListener {
             popupMenu(it, MyTask, position)
@@ -84,10 +93,11 @@ class MyTaskAdapter(val mCtx: Context, val LayoutResid: Int, var myTaskList: Lis
     }
 
     private fun deleteTask(taskId: String) {
-        database = FirebaseDatabase.getInstance().getReference()
+        database = FirebaseDatabase.getInstance().reference
         database.child(taskId).child(taskId).removeValue()
         database.child("Tasks").child(taskId).removeValue()
         database.child("MyTask").child(auth.uid.toString()).child(taskId).removeValue()
+        database.child("PublicTask").child(taskId).removeValue()
 
     }
 

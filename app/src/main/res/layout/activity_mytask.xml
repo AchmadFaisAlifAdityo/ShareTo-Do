@@ -20,8 +20,8 @@
         android:id="@+id/lv_Mytask"
         android:layout_width="390dp"
         android:layout_height="710dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="10dp"
-        />
+        android:layout_margin="10dp"
+        android:divider="@android:color/transparent"
+        android:dividerHeight="9.0sp"/>
 
 </RelativeLayout>

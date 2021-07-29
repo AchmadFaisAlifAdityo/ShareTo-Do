@@ -15,14 +15,14 @@
         android:background="@drawable/ic_back" />
 
     <TextView
-        android:id="@+id/tvd_judul"
+        android:id="@+id/tvd_judul_dmta"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
         android:layout_marginTop="44dp"
         android:ems="10"
-        android:textSize="20dp"
         android:hint="Title"
+        android:textSize="20dp"
         android:inputType="textPersonName" />
 
     <ScrollView
@@ -31,21 +31,21 @@
         android:layout_marginTop="10dp">
 
         <LinearLayout
-            android:id="@+id/layout_list_dta"
+            android:id="@+id/layout_list_dmta"
             android:layout_width="match_parent"
             android:layout_height="364dp"
             android:layout_marginTop="10dp"
-            android:orientation="vertical"></LinearLayout>
+            android:orientation="vertical"/>
     </ScrollView>
 
     <Button
-        android:id="@+id/bt_clone"
+        android:id="@+id/bt_submit_task"
         android:layout_width="358dp"
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:fontFamily="@font/average_sans"
         android:layout_marginTop="10dp"
-        android:text="Clone to MyTask" />
+        android:text="Submit" />
 
 </LinearLayout>

@@ -2,7 +2,6 @@ package com.example.sharetodo.activity
 
 import Database.MyTask
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
@@ -37,7 +36,7 @@ class UpdateTaskActivity : AppCompatActivity() {
         }
 
         bt_Submit.setOnClickListener {
-            checkandRead()
+            checkAndRead()
             saveData()
         }
 
@@ -79,7 +78,7 @@ class UpdateTaskActivity : AppCompatActivity() {
         layoutList!!.addView(v)
     }
 
-    private fun checkandRead(): Boolean {
+    private fun checkAndRead(): Boolean {
         lisItem.clear()
         var result = true
         for (i in 0 until layoutList!!.childCount) {
@@ -90,6 +89,7 @@ class UpdateTaskActivity : AppCompatActivity() {
 
             if (edtList.text.toString() != "") {
                 il.setItem(edtList.text.toString())
+                il.checklist = false
             } else {
                 result = false
                 break
@@ -109,7 +109,7 @@ class UpdateTaskActivity : AppCompatActivity() {
     }
 
     private fun saveData(){
-        val ref = FirebaseDatabase.getInstance().getReference()
+        val ref = FirebaseDatabase.getInstance().reference
         val myTaskId = intent.getStringExtra("Id")
         val userID = auth.uid.toString()
         val sdf = SimpleDateFormat("HH:mm a")

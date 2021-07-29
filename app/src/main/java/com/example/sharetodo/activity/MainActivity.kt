@@ -24,7 +24,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        ref = FirebaseDatabase.getInstance().getReference()
+        ref = FirebaseDatabase.getInstance().reference
         auth = FirebaseAuth.getInstance()
         publicTaskList = mutableListOf()
         ref.child("PublicTask").addValueEventListener(object : ValueEventListener {

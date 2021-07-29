@@ -20,6 +20,7 @@
         android:layout_marginTop="44dp"
         android:ems="10"
         android:hint="Title"
+        android:textSize="20dp"
         android:inputType="textPersonName" />
 
     <ImageView
