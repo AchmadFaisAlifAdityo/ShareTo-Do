@@ -40,6 +40,7 @@ class PublicTaskAdapter(val mCtx : Context, val LayoutResid : Int, val publicTas
             bundle.putSerializable("Id", MyTask.id)
             bundle.putSerializable("Judul", MyTask.judul)
             bundle.putSerializable("Itemlist", MyTask.listItem)
+            bundle.putSerializable("Author", MyTask.author)
             intent.putExtras(bundle)
             mCtx.startActivity(intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK))
         }

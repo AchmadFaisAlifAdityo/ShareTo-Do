@@ -34,10 +34,10 @@ class LoginActivity : AppCompatActivity() {
         loginButton.setOnClickListener{
 
             if(TextUtils.isEmpty(usernameoremailInput.text.toString())){
-                usernameoremailInput.setError("Please enter Email!")
+                usernameoremailInput.error = "Please enter Email!"
                 return@setOnClickListener
             }else if(TextUtils.isEmpty(passwordLogin.text.toString())) {
-                passwordLogin.setError("Please enter Email!")
+                passwordLogin.error = "Please enter Email!"
                 return@setOnClickListener
             }
             auth.signInWithEmailAndPassword(usernameoremailInput.text.toString(), passwordLogin.text.toString())

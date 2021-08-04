@@ -3,9 +3,16 @@ package com.example.sharetodo.activity
 import Database.MyTask
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
+import android.view.View
+import android.widget.CheckBox
+import android.widget.ImageView
+import android.widget.LinearLayout
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.sharetodo.R
 import com.example.sharetodo.adapter.MyTaskAdapter
+import com.example.sharetodo.entity.ItemLIst
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.activity_mytask.*
@@ -15,12 +22,12 @@ class MyTaskActivity : AppCompatActivity() {
     private lateinit var ref : DatabaseReference
     private lateinit var myTaskList : MutableList<MyTask>
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_mytask)
         auth = FirebaseAuth.getInstance()
         ref = FirebaseDatabase.getInstance().reference
-
 
         bt_addTask.setOnClickListener{
             this.startActivity(Intent(this, AddTaskActivity::class.java))
@@ -36,6 +43,7 @@ class MyTaskActivity : AppCompatActivity() {
                         myTask.id = h.key
                         myTaskList.add(myTask)
                         loadTasks(myTask)
+
                     }
                     val adapter = MyTaskAdapter(applicationContext, R.layout.item_mytask,myTaskList)
                     lv_Mytask.adapter = adapter
@@ -71,5 +79,4 @@ class MyTaskActivity : AppCompatActivity() {
 
         })
     }
-
 }
