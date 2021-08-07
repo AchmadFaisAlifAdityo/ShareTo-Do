@@ -7,18 +7,42 @@
     android:layout_height="match_parent"
     tools:context=".activity.MainActivity">
 
+
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        />
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:id="@+id/rl1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/layout"
+            android:paddingBottom="65dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15sp"
+                android:layout_marginLeft="50dp"
+                android:text="Home"
+                android:layout_centerHorizontal="true"
+                android:fontFamily="sans-serif"
+                android:textColor="@color/white"
+                android:textSize="25sp" />
+
+    </RelativeLayout>
+
     <ListView
         android:id="@+id/lvp_myTask"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_margin="10dp"
-        android:divider="@android:color/transparent"
-        android:dividerHeight="9.0sp"/>
+        android:layout_marginTop="80dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"/>
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/navView"
