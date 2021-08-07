@@ -1,6 +1,7 @@
 package com.example.sharetodo.activity
 
 import Database.MyTask
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.CheckBox
@@ -17,6 +18,7 @@ import kotlinx.android.synthetic.main.activity_detail_mytask.*
 import java.text.SimpleDateFormat
 import java.util.*
 
+
 class DetailMyTaskActivity : AppCompatActivity() {
 
     lateinit var auth: FirebaseAuth
@@ -31,12 +33,14 @@ class DetailMyTaskActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detail_mytask)
         layoutList = findViewById(R.id.layout_list_dmta)
+
         getAndSetData()
 
         auth = FirebaseAuth.getInstance()
         bt_submit_task.setOnClickListener{
             checkAndReadList()
             submitData()
+            finish()
             Toast.makeText(this,"Task berhasil di clone ke My Task", Toast.LENGTH_SHORT).show()
         }
     }
@@ -48,13 +52,17 @@ class DetailMyTaskActivity : AppCompatActivity() {
             for (i in (intent.extras!!.getSerializable("Itemlist") as java.util.ArrayList<ItemLIst>)){
                 val v: View = layoutInflater.inflate(R.layout.card_layout_dmta, null, false)
                 itemList = v.findViewById(R.id.tv_list_dmta)
-                check = v.findViewById(R.id.cb_list_dmta)
+                check = v.findViewById(R.id.cb_list_dmta) as CheckBox
                 itemList.text = i.getItem()
+                if (i.checklist == true){
+                    check.isChecked = true
+                }
                 layoutList!!.addView(v)
             }
         } else {
             Toast.makeText(this, "No data.", Toast.LENGTH_SHORT).show()
         }
+
     }
 
     private fun checkAndReadList(): Boolean {
@@ -102,8 +110,7 @@ class DetailMyTaskActivity : AppCompatActivity() {
 
         if (myTaskId != null) {
             ref.child("Tasks").child(myTaskId).setValue(myTask).addOnCompleteListener {
-                Toast.makeText(applicationContext, "Data berhasil di update ", Toast.LENGTH_SHORT)
-                    .show()
+                Toast.makeText(applicationContext, "Data berhasil di update ", Toast.LENGTH_SHORT).show()
             }
         }
     }

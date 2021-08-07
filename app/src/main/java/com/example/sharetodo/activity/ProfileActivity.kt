@@ -29,16 +29,14 @@ class ProfileActivity : AppCompatActivity() {
         val user = auth.currentUser
         val userReference = databaseReference?.child(user?.uid!!)
 
-        email.text = "Email            : "+ user?.email
+        email.text = "Email : "+ user?.email
 
         userReference?.addValueEventListener(object: ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
-                username.text = "Username   : " + snapshot.child("Username").value.toString()
-                //email.text = snapshot.child("Email").value.toString()
+                username.text = "Username : " + snapshot.child("Username").value.toString()
             }
 
             override fun onCancelled(error: DatabaseError) {
-                TODO("Not yet implemented")
             }
         })
 

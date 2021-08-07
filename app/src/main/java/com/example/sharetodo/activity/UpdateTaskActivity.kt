@@ -94,9 +94,7 @@ class UpdateTaskActivity : AppCompatActivity() {
                 result = false
                 break
             }
-
             lisItem.add(il)
-
         }
 
         if (lisItem.size == 0) {
@@ -123,6 +121,5 @@ class UpdateTaskActivity : AppCompatActivity() {
             }
         }
     }
-
 }
 

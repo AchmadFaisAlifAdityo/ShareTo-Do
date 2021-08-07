@@ -33,13 +33,13 @@ class AddTaskActivity : AppCompatActivity() {
         layoutList = findViewById(R.id.layout_list_upd)
 
         auth = FirebaseAuth.getInstance()
-        val currentuser = auth.currentUser
+        val currentUser = auth.currentUser
 
         auth = FirebaseAuth.getInstance()
         database = FirebaseDatabase.getInstance()
         databaseReference = database?.reference!!.child("profile")
 
-        if(currentuser != null) {
+        if(currentUser != null) {
             bt_addlist_upd.setOnClickListener{
                 addList()
             }

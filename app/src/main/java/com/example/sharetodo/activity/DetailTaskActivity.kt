@@ -25,6 +25,7 @@ class DetailTaskActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detail_task)
         layoutList = findViewById(R.id.layout_list_dta)
+
         getAndSetData()
 
         auth = FirebaseAuth.getInstance()
@@ -73,7 +74,7 @@ class DetailTaskActivity : AppCompatActivity() {
     private fun cloneData(){
             val ref = FirebaseDatabase.getInstance().reference
             val myTaskId = ref.push().key
-            val userID = auth.uid.toString()
+            val userID = intent.getStringExtra("Author").toString()
             val sdf = SimpleDateFormat("HH:mm a")
             val cal = Calendar.getInstance()
             val waktu = sdf.format(cal.time)
@@ -83,7 +84,7 @@ class DetailTaskActivity : AppCompatActivity() {
                 ref.child("Tasks").child(myTaskId).setValue(myTask).addOnCompleteListener{
                     Toast.makeText(applicationContext, "Data berhasil diclone", Toast.LENGTH_SHORT).show()
                 }
-                ref.child("MyTask").child(userID).child(myTaskId).setValue(true)
+                ref.child("MyTask").child(auth.uid.toString()).child(myTaskId).setValue(true)
             }
     }
 }

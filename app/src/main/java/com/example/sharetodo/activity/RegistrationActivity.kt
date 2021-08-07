@@ -32,19 +32,19 @@ class RegistrationActivity : AppCompatActivity() {
         RegisterButton.setOnClickListener{
 
             if(TextUtils.isEmpty(UsernameInput.text.toString())){
-                username.setError("Please enter Username!")
+                username.error = "Please enter Username!"
                 return@setOnClickListener
             }else if(TextUtils.isEmpty(emailInput.text.toString())) {
-                emailInput.setError("Please enter Email!")
+                emailInput.error = "Please enter Email!"
                 return@setOnClickListener
             }else if(TextUtils.isEmpty(passwordInput.text.toString())) {
-                passwordInput.setError("Please enter Password!")
+                passwordInput.error = "Please enter Password!"
                 return@setOnClickListener
             } else if(TextUtils.isEmpty(rpasswordInput.text.toString())) {
-                rpasswordInput.setError("Please enter Password!")
+                rpasswordInput.error = "Please enter Password!"
                 return@setOnClickListener
             } else if(!TextUtils.equals(passwordInput.text.toString(), rpasswordInput.text.toString())){
-                rpasswordInput.setError("Password doesn't match!")
+                rpasswordInput.error = "Password doesn't match!"
                 return@setOnClickListener
             }
             auth.createUserWithEmailAndPassword(emailInput.text.toString(), passwordInput.text.toString())
